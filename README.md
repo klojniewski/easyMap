@@ -58,3 +58,11 @@ Change id attribute of map container element.
 default: true
 options: bool
 ```
+
+##Alternative configuration
+
+You can pass configuration options in data attribute of map container element:
+
+```html
+<div class="map-wrapper" data-options='{"lat": "52.224844", "lng": "20.957212"}'>
+```
