@@ -3,10 +3,12 @@
     "use strict";
     var pluginName  =   "easyMap",
         defaults    =   {
-            lat:                1.276816,
-            lng:                103.848346,
-            zoom:               13,
-            randomId:           true
+            lat: 1.276816,
+            lng: 103.848346,
+            zoom: 13,
+            randomId: true,
+            markerIcon: '',
+            styles: false
         };
     // The actual plugin constructor
     function Plugin(element, options) {
@@ -39,6 +41,9 @@
             if (this.settings.randomId) {
                 this.$element.attr('id', this.getRandomId());
             }
+            if (this.$element.height() === 0) {
+                this.$element.height('100%');
+            }
         },
         render: function () {
             this.renderMap();
@@ -53,7 +58,8 @@
                     },
                     streetViewControl: false,
                     mapTypeControl: false,
-                    scrollwheel: false
+                    scrollwheel: false,
+                    styles: this.settings.styles
                 };
             this.mapLocation = new google.maps.LatLng(this.settings.lat, this.settings.lng);
             this.map = new google.maps.Map(document.getElementById(this.element.id), $.extend(mapOptions, { center: this.mapLocation }));
@@ -61,6 +67,7 @@
         addMarker: function () {
             this.marker = new google.maps.Marker({
                 position: this.mapLocation,
+                icon: this.settings.markerIcon,
                 map: this.map
             });
         },
