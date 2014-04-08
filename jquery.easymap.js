@@ -8,6 +8,7 @@
             zoom: 13,
             randomId: true,
             markerIcon: '',
+            tooltip: false,
             styles: false
         };
     // The actual plugin constructor
@@ -47,6 +48,7 @@
         },
         render: function () {
             this.renderMap();
+            this.enableTooltips();
             this.addMarker();
         },
         renderMap: function () {
@@ -64,12 +66,26 @@
             this.mapLocation = new google.maps.LatLng(this.settings.lat, this.settings.lng);
             this.map = new google.maps.Map(document.getElementById(this.element.id), $.extend(mapOptions, { center: this.mapLocation }));
         },
+        enableTooltips: function () {
+            if (this.settings.tooltip) {
+                var that = this;
+                this.infowindow = new google.maps.InfoWindow({
+                    content: that.settings.tooltip
+                });
+            }
+        },
         addMarker: function () {
             this.marker = new google.maps.Marker({
                 position: this.mapLocation,
                 icon: this.settings.markerIcon,
                 map: this.map
             });
+            if (this.settings.tooltip) {
+                var that = this;
+                google.maps.event.addListener(this.marker, 'click', function () {
+                    that.infowindow.open(that.map, that.marker);
+                });
+            }
         },
         getRandomId: function () {
             var randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26)),
