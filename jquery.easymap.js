@@ -6,9 +6,13 @@
             lat: 1.276816,
             lng: 103.848346,
             zoom: 13,
+            zoomControl: true,
+            mapTypeControl: false,
+            streetViewControl: false,
             randomId: true,
             markerIcon: '',
             tooltip: false,
+            scrollwheel: false,
             styles: false
         };
     // The actual plugin constructor
@@ -58,9 +62,10 @@
                     navigationControlOptions: {
                         style: google.maps.NavigationControlStyle.SMALL
                     },
-                    streetViewControl: false,
-                    mapTypeControl: false,
-                    scrollwheel: false,
+                    streetViewControl: this.settings.streetViewControl,
+                    mapTypeControl: this.settings.mapTypeControl,
+                    scrollwheel: this.settings.scrollwheel,
+                    zoomControl: this.settings.zoomControl,
                     styles: this.settings.styles
                 };
             this.mapLocation = new google.maps.LatLng(this.settings.lat, this.settings.lng);

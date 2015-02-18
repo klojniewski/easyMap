@@ -2,10 +2,10 @@
 
 
 ###Benefits
-* You can allow easly add Google Maps on your website.
+* You can easily add Google Maps to your website.
 * Google Maps API is loaded in the background.
 
-Warrning: if you want use it on multiple places on on one page, you should include Google Maps.
+Warning: if you want to use it in multiple places on one page, you should include Google Maps library manually.
 
 ##Installation
 
